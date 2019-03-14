@@ -17,7 +17,7 @@ def waypoint_goal():
     goal = MoveBaseGoal()
 
     inputcoords = os.path.dirname(os.path.realpath(__file__))[
-        :-7] + "waypointset.csv"
+        :-7] + "waypointset2.csv"
     with open(inputcoords, 'rb') as csvfile:
         creader = csv.reader(csvfile)
         allcoords = list(creader)
@@ -42,7 +42,8 @@ def waypoint_goal():
         sac.send_goal(goal)
 
         # finish
-        sac.wait_for_result(rospy.Duration(60*8))
+        sac.wait_for_result(rospy.Duration(600))
+	#sac.wait_for_result(rospy.Duration(20))
 
         #print result
         print("Arrived at waypoint(" + str(rownum) + "/" +

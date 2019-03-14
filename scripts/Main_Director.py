@@ -23,7 +23,7 @@ def setDoor(val):
         Set_Env_Var("DOOR_PROB", "100")
         print("Door Probability = 100%")
     elif val == False:
-        randommap.mainProg(0)
+        randommap.mainProg(85)
         Set_Env_Var("DOOR_PROB", "85")
         print("Door Probability = 85%")
 

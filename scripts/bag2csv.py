@@ -75,7 +75,7 @@ def go():
     # add header if file is empty
     writeheader = False
     headerrow = ["File", "Odom Distance (m)", "Goal Distance (m)", "Time to waypoint (s)", "Average Velocity Over Waypoint (m/s)",
-                 "Standardized Waypoint Deviation (m/m)", "Lidar Range", "Lidar Rate", "IMU Rate", "Planner", "Door Probability", "Laser Noise", "Gyro Noise", "Accel Noise", "Dijkstra"]
+                 "Standardized Waypoint Deviation (m/m)", "Lidar Range", "Planner", "Door Probability", "Laser Noise", "Gyro Noise", "Accel Noise", "Dijkstra"]
     if os.path.isfile(os.path.dirname(os.path.realpath(__file__))[:-8] + "/csv/result.csv"):
         if os.stat(os.path.dirname(os.path.realpath(__file__))[:-8] + "/csv/result.csv").st_size == 0:
             writeheader = True
@@ -91,8 +91,8 @@ def go():
     # tested with variables, unsure what will happen if they are unset
     try:
         lidarrange = [os.environ['LASER_RANGE_VAL']] * len(result)
-        lidarrate = [os.environ['LASER_UPDATE_RATE']] * len(result)
-        imurate = [os.environ['IMU_UPDATE_RATE']] * len(result)
+        #lidarrate = [os.environ['LASER_UPDATE_RATE']] * len(result)
+        #imurate = [os.environ['IMU_UPDATE_RATE']] * len(result)
         planner = [os.environ['PLANNER']] * len(result)
         door = [os.environ['DOOR_PROB']] * len(result)
         lasernoise = [os.environ['LASER_NOISE_STDDEV']] * len(result)
@@ -119,7 +119,7 @@ def go():
         if writeheader:
             filewriter.writerow(headerrow)
         filewriter.writerows(np.column_stack(
-            (bagFilecolumn, odom, goal, result, avgvel, stdwpt, lidarrange, lidarrate, imurate, planner, door, lasernoise, imugyronoise, imuaccelnoise, dijkstra)))
+            (bagFilecolumn, odom, goal, result, avgvel, stdwpt, lidarrange, planner, door, lasernoise, imugyronoise, imuaccelnoise, dijkstra)))
     bag.close()
     print "Done reading bag file."
 
